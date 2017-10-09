@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html>
+	<meta charset="utf-8">
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-alpha.6/css/bootstrap.min.css">
+    
+   
+	<head>
+	<title>Circle</title>
+</head>
+
+<body>
+	<div class="container">
+		<h1>Tyre Calc</h1>
+		<div class="row">
+			
+			<div class="col-lg-6">
+
+				<input class="form-control" type="text" id="diameter" placeholder="Rim Diameter">
+				<input class="form-control" type="text" id="tyre" placeholder="Height">
+				<input class="form-control" type="text" id="arc" placeholder="Arc diameter">
+				
+				<input class="form-control" type="text" id="result" disabled value="0">
+				<button id="add" class="btn btn-success">Add To Table</button>	
+			</div>
+			<div class="col-lg-6">
+				<table class="table table-inverse">
+				  <thead>
+				    <tr>
+				      <th>Rim</th>
+				      <th>Tyre</th>
+				      <th>Tyre Diameter</th>
+				      <th>Arc</th>
+				    </tr>
+				  </thead>
+				  <tbody id="rows">
+				    
+				  </tbody>
+				</table>
+			</div>
+		</div>	
+	</div>
+	<script>
+		document.getElementById("diameter").addEventListener("change", calc);
+		document.getElementById("tyre").addEventListener("change", calc);
+		document.getElementById("arc").addEventListener("change", calc);
+		document.getElementById("add").addEventListener("click", addToTable);
+
+			function addToTable(){
+			var table = document.getElementById("rows")
+			var tr = table.insertRow(0);
+
+			var td0 = tr.insertCell(0);
+			var td1 = tr.insertCell(1);
+			var td2 = tr.insertCell(2);
+			var td3 = tr.insertCell(3);
+
+			td0.innerHTML = document.getElementById('diameter').value * 2.54;
+			td1.innerHTML = document.getElementById('tyre').value / 10;
+			td2.innerHTML = document.getElementById('arc').value;
+			td3.innerHTML = document.getElementById('result').value;
+
+			
+
+			// var table=document.getElementById("rows");
+			// table.innerHTML +="<tr><td></td><td></td><td></td><td></td></tr>"
+		}
+		function calc(){
+
+			var diameter_cm = document.getElementById('diameter').value * 2.54;
+			var tyre_cm= document.getElementById('tyre').value / 10;
+			var arc_cm = document.getElementById('arc').value;
+
+			var result = diameter_cm + 2 * tyre_cm;
+			document.getElementById('result').value = result;
+
+			if (result > arc_cm){
+				document.getElementById('result').style.backgroundColor="red";
+
+			} else {
+				document.getElementById('result').style.backgroundColor="green";
+			}
+
+		}
+
+	</script>
+</body>
+</html>
